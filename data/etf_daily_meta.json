@@ -1,0 +1,34 @@
+{
+  "updated_utc": "2026-04-17T13:38:48.711182+00:00",
+  "tickers_ok": [
+    "px_DBC",
+    "px_GLD",
+    "px_HYG",
+    "px_IEF",
+    "px_IWM",
+    "px_LQD",
+    "px_QQQ",
+    "px_SHY",
+    "px_SPY",
+    "px_TLT",
+    "px_UUP",
+    "px_XLB",
+    "px_XLE",
+    "px_XLF",
+    "px_XLI",
+    "px_XLK",
+    "px_XLP",
+    "px_XLRE",
+    "px_XLU",
+    "px_XLV",
+    "px_XLY"
+  ],
+  "tickers_failed": [],
+  "row_count": 8361,
+  "date_range": [
+    "1993-01-29",
+    "2026-04-17"
+  ],
+  "source": "yfinance via GitHub Actions",
+  "adjustment": "auto_adjust=True (split+dividend adjusted close)"
+}
