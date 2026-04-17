@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+
+# Local-only logs from fetcher runs
+*_run.log
+
+# Built locally from FRED + user's barchart + committed ETF parquet.
+# Not checked in (binary, 2+ MB, rebuildable).
+regime_data.parquet
+
+# Secrets
+.env

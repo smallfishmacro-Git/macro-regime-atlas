@@ -1,0 +1,43 @@
+name: Update ETF daily data
+
+# Runs 23:00 UTC on weekdays: 6pm EST (winter) / 7pm EDT (summer) —
+# i.e. always at least 2 hours after US market close (4pm ET).
+# Also supports manual trigger from the Actions tab.
+
+on:
+  schedule:
+    - cron: '0 23 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deps
+        run: pip install --upgrade pip && pip install pandas pyarrow yfinance 'curl_cffi>=0.7'
+
+      - name: Fetch ETF daily data
+        run: python update_etf_daily.py
+
+      - name: Commit and push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/etf_daily.parquet data/etf_daily_meta.json
+          if git diff --cached --quiet; then
+            echo "No changes — nothing to commit."
+          else
+            git commit -m "chore: update ETF daily data $(date -u +%Y-%m-%d)"
+            git push
+          fi
