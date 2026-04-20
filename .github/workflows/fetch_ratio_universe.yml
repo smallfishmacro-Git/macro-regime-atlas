@@ -1,0 +1,41 @@
+name: Fetch ratio universe
+
+# Manual-only: one-shot backfill that pulls the 28 new tickers for the
+# 47-ratio cross-asset composite and merges them into regime_data.parquet,
+# writing regime_data_ratios.parquet.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deps
+        run: pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Fetch ratio universe
+        run: python fetch_ratio_universe.py
+
+      - name: Commit and push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add regime_data_ratios.parquet
+          if git diff --cached --quiet; then
+            echo "No changes — nothing to commit."
+          else
+            git commit -m "chore: refresh ratio universe $(date -u +%Y-%m-%d)"
+            git push
+          fi
