@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-04-17T23:31:39.468676+00:00",
+  "updated_utc": "2026-04-20T23:35:18.564506+00:00",
   "tickers_ok": [
     "px_DBC",
     "px_GLD",
@@ -24,10 +24,10 @@
     "px_XLY"
   ],
   "tickers_failed": [],
-  "row_count": 8361,
+  "row_count": 8362,
   "date_range": [
     "1993-01-29",
-    "2026-04-17"
+    "2026-04-20"
   ],
   "source": "yfinance via GitHub Actions",
   "adjustment": "auto_adjust=True (split+dividend adjusted close)"
