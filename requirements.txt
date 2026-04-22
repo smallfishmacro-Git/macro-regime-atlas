@@ -3,3 +3,4 @@ pyarrow
 yfinance
 curl_cffi>=0.7
 fredapi
+requests

@@ -28,6 +28,9 @@ jobs:
       - name: Fetch ratio universe
         run: python fetch_ratio_universe.py
 
+      - name: Merge SOFR into parquet
+        run: python scripts/merge_sofr_into_parquet.py
+
       - name: Commit and push
         run: |
           git config user.name  "github-actions[bot]"
