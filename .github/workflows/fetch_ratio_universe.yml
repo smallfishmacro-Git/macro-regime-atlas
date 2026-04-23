@@ -31,6 +31,14 @@ jobs:
       - name: Merge SOFR into parquet
         run: python scripts/merge_sofr_into_parquet.py
 
+      - name: Fetch FRED data
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: python scripts/fetch_fred_data.py
+
+      - name: Merge barchart data
+        run: python scripts/merge_barchart_data.py
+
       - name: Commit and push
         run: |
           git config user.name  "github-actions[bot]"
